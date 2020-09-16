@@ -1,0 +1,15 @@
+pluginManagement {
+    repositories {
+        mavenLocal()
+        gradlePluginPortal()
+        maven { url "https://maven.aliyun.com/repository/public" }
+        maven { url "https://maven.aliyun.com/repository/spring" }
+        maven { url "https://maven.aliyun.com/repository/spring-plugin" }
+        maven { url 'https://repo.spring.io/plugins-release' }
+        mavenCentral()
+    }
+}
+
+rootProject.name = 'bell-common'
+include 'bell-core','bell-gateway','bell-knife4j'
+

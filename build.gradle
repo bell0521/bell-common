@@ -1,0 +1,55 @@
+ext {//依赖版本
+	springBootVersion = "2.3.2.RELEASE"
+	springCloudVersion = "Hoxton.SR6"
+	lombokVersion = "1.18.10"
+}
+
+// 构建配置
+buildscript {
+	ext {//依赖版本
+		springBootVersion = "2.3.2.RELEASE"
+	}
+	repositories {
+		mavenLocal()
+		maven { url "https://maven.aliyun.com/repository/public" }
+		maven { url "https://maven.aliyun.com/repository/spring" }
+		maven { url "https://maven.aliyun.com/repository/spring-plugin" }
+		maven { url 'https://repo.spring.io/plugins-release' }
+		mavenCentral()
+	}
+	dependencies {
+		classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
+	}
+}
+
+// 全局配置
+allprojects {
+	group = GROUPID
+	version = VERSION
+
+}
+
+// 子项目配置
+subprojects {
+	apply plugin: 'java'
+	apply plugin: 'org.springframework.boot'
+	apply plugin: "io.spring.dependency-management"
+
+	sourceCompatibility = JavaVersion.VERSION_1_8
+	targetCompatibility = JavaVersion.VERSION_1_8
+
+	repositories {
+		mavenLocal()
+		maven { url "https://maven.aliyun.com/repository/public" }
+		maven { url "https://maven.aliyun.com/repository/spring" }
+		maven { url "https://maven.aliyun.com/repository/spring-plugin" }
+		mavenCentral()
+	}
+
+	dependencies {
+		implementation platform("org.springframework.boot:spring-boot-dependencies:${springBootVersion}")
+		implementation platform("org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}")
+		annotationProcessor("org.projectlombok:lombok:${lombokVersion}")
+		compileOnly("org.projectlombok:lombok:${lombokVersion}")
+	}
+}
